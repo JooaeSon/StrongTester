@@ -245,7 +245,7 @@ document.oncontextmenu = function (e) {
 
 //////////타이머
 var nowTime = new Date();
-var endTime = new Date("October 17, 2020 20:36:30");
+var endTime = new Date("September 20, 2020 01:00:30");
 var diff = endTime.getTime() - nowTime.getTime();
 
 function leftTimeCalculate(millisec) {
