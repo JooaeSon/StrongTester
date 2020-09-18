@@ -247,7 +247,7 @@ public class TesterCtrl {
 		log.info("student_code:>>>>>>>>>>>>>"+student_code
 				+" student_name:>>>>>>"+student_name+"student_uuid:>>>>>"+student_uuid);
 		//시험을 아직 응시 하지 않은 학생일 경우
-		if("Y".equalsIgnoreCase(service.ChkTestFlag(student_code))) {
+		if("N".equalsIgnoreCase(service.ChkTestFlag(student_code))) {
 			//session.setAttribute("stdInfo", mDto);
 
 			session.setAttribute("student_code", student_code);
@@ -258,7 +258,8 @@ public class TesterCtrl {
 			//IP
 			//ChkIp(req, student_code);
 			//아래 ip는 테스트 용입니다.
-			String stdIP="172.30.1.9";
+			//"172.30.1.9"
+			String stdIP=ChkIp(req, student_code);
 			Map<String, Object> ipMap = new HashMap<String, Object>();
 			ipMap.put("student_code", student_code);
 			ipMap.put("student_ip", stdIP);
