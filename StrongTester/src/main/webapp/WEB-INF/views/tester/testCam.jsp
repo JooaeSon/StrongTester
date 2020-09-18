@@ -26,11 +26,6 @@
       </form>
 <!-- 여기서부터 오늘 한 것들 -->
 
-  
- <button id="stop" onclick="location.href='./webcambriged.do?isc='+false">나나</button>
- 	
-	
-
       <video autoplay="autoplay" id="myCam"></video>
    </section>
 </body>
