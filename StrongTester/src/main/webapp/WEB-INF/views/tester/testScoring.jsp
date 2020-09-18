@@ -24,10 +24,7 @@
     <nav id="navbar">
 <h3>인공지능</h3>
       <div>
-<!--         <form action="./studentsInfo.do" method="POST">
-            <input type="submit" id="close__button" name="goList" value="이전"/>
-            <input type="submit" id="save__button" name="goSave" value="저장"/>
-         </form> -->
+
           <a href="./home.do"><button class="home__button"><i class="fas fa-home"></i></button></a>
          
        </div>
@@ -65,19 +62,18 @@
       </table>
     <article class="webcam">
         <div>웹캠 기록내역</div>
-     
-        <video controls width="200">
-          <source src="./img/Library.mp4" type="video/mp4" />
-          Sorry, your browser doesn't support embedded videos.
-        </video>
-        <video controls width="200">
-          <source src="./img/Library.mp4" type="video/mp4" />
-          Sorry, your browser doesn't support embedded videos.
-        </video>
+
+
+     <video  src="./video/SSUIT%A0332120162625%20200918 10-20-56.mp4" controls  ></video>
+     <video  src="./video/SSUIT%A0332120162625%20200918 10-20-56.mp4" controls  ></video>
+
+ 
+      
+      
       </article>
     </section>
     
-    <!-- 반복문 시작-->
+  
     <c:forEach var="aswDto" items="${aswlst}" varStatus="vs">  
     <section class="section">
       <article class="section__container">
@@ -101,7 +97,7 @@
       </article>
     </section>
      </c:forEach> 
-    <!-- 반복문 끝  -->
+
     
   </body>
 </html>
