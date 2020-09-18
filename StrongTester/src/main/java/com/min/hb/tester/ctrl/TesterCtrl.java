@@ -63,9 +63,6 @@ public class TesterCtrl {
 	@Autowired
 	private IService_Student service;
 
-	@Autowired
-	ServletContext context;
-
 	@Async
 	public   void detectFace(Mat frame, CascadeClassifier faceCascade) {
 		// TODO Auto-generated method stub
@@ -119,9 +116,7 @@ public class TesterCtrl {
 		int fourcc = VideoWriter.fourcc('M','J','P','G');
 		writer= new VideoWriter();
 		Size frameSize = new Size((int) capture.get(Videoio.CAP_PROP_FRAME_WIDTH),(int) capture.get(Videoio.CAP_PROP_FRAME_HEIGHT));
-		
-		List<String> videolst = new ArrayList<String>();
-		
+
 		// 저장 타이머
 		r_timer = new Timer();
 		TimerTask r_task = new TimerTask() {
@@ -136,20 +131,18 @@ public class TesterCtrl {
 					System.out.println(stdCode);
 					//./video/주관사id+%시험코드+"?"+학번+%영상번호
 					//            String name ="C:\\HappyBugs\\workspace_project\\cnt0_"+time1+".avi";
-					String name ="C:\\HappyBugs\\workspace_project\\StrongTester\\src\\main\\webapp\\video\\SSUIT%A033212"+stdCode+"%"+time1+".avi";
-
-					videolst.add(name); //비디오리스트에 저장
+					String name ="C:\\HappyBugs\\git\\HappyBug\\StrongTester\\src\\main\\webapp\\video\\SSUIT%A033212\"+stdCode+\"%\"+time1+\".mp4";
+							//"C:\\HappyBugs\\workspace_project\\StrongTester\\src\\main\\webapp\\video\\SSUIT%A033212"+stdCode+"%"+time1+".avi";
+					
 					writer.open(name, fourcc, 10, frameSize,true);
-
 				}
 				else if (count >= 2) {      
 					System.out.println("2명감지");
 					//            String name =".//video//"+stdCode+".avi";
-					String name ="C:\\HappyBugs\\workspace_project\\StrongTester\\src\\main\\webapp\\video\\SSUIT%A033212"+stdCode+"%"+time1+".avi";
+					String name ="C:\\HappyBugs\\git\\HappyBug\\StrongTester\\src\\main\\webapp\\video\\SSUIT%A033212\"+stdCode+\"%\"+time1+\".mp4";
 					//            String name ="C:\\HappyBugs\\workspace_project\\cnt2_"+time1+".avi";
 					writer.open(name, fourcc, 10, frameSize,true);
 					//writer.write(frame);
-					videolst.add(name); 
 				}
 			}   
 		};
@@ -171,7 +164,7 @@ public class TesterCtrl {
 		};
 		m_timer.schedule(m_task, 3000);
 		
-		context.setAttribute("videolst", videolst);
+		
 	}
 
 
@@ -360,27 +353,6 @@ public class TesterCtrl {
 	 */
 	@RequestMapping(value="/testAftersummit.do", method=RequestMethod.GET)
 	public String testAftersummit(HttpSession session) {
-		//List<String> capture_content = Arrays.asList(new String[]{"a","b","c"});
-		ArrayList<String> capture_content=(ArrayList)context.getAttribute("videolst");
-		log.info("capture_content:"+capture_content);
-		Map<String, Object> vmap=new HashMap<String, Object>();
-		String student_code=(String)session.getAttribute("student_code");
-
-		vmap.put("student_code", student_code);
-
-		int makeVideoLinkcnt=0;
-		for(int i=0; i < capture_content.size(); i++) {
-			vmap.put("video_num", Integer.toString(i));
-			vmap.put("capture_content", capture_content.get(i));
-			boolean visc=service.InsertVideo(vmap);
-			if(visc==true) {
-				makeVideoLinkcnt++;
-			}
-		}
-
-		if(makeVideoLinkcnt==capture_content.size()) {
-			log.info("성공한 비디오 링크 갯수: \t>"+makeVideoLinkcnt);
-		}
 
 		log.info("TestCtrl_Aftersummit 제출 완료");
 		log.info("시험이 끝났습니다. : \t {}");
@@ -388,7 +360,6 @@ public class TesterCtrl {
 		//세션 제거
 		if(session.getAttribute("student_code") !=null) {
 			log.info("session 제거 완료");
-			context.removeAttribute("capture_content");
 			session.removeAttribute("student_code");
 			session.removeAttribute("student_name");
 			session.removeAttribute("student_uuid");

@@ -89,13 +89,13 @@ public class ServiceImpl_Student implements IService_Student{
 
 	@Override
 	public boolean InsertVideo(Map<String, Object> vmap) {
-		log.info("ServiceImpl_InsertVideo 학생답안 및 각 답안 점수 조회 :{}", vmap);
+		log.info("ServiceImpl_InsertVideo 비디오 input :{}", vmap);
 		return dao.InsertVideo(vmap);
 	}
 
 	@Override
 	public List<String> SelectVideoLink(String capture_content) {
-		log.info("ServiceImpl_SelectVideoLink 학생답안 및 각 답안 점수 조회 :{}", capture_content);
+		log.info("ServiceImpl_SelectVideoLink 비디오 링크 선택 :{}", capture_content);
 		return dao.SelectVideoLink(capture_content);
 	}
 

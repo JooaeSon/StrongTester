@@ -102,7 +102,7 @@ public class DaoImpl_Student implements IDao_Student {
 
 	@Override
 	public List<String> SelectVideoLink(String capture_content) {
-		log.info("DaoImpl_SelectVideoLink 비디오 링크 생성 :{}", capture_content);
+		log.info("DaoImpl_SelectVideoLink 비디오 링크 선택 :{}", capture_content);
 		return session.selectList(NS+"SelectVideoLink", capture_content);
 	}
 	
