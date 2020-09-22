@@ -80,8 +80,6 @@ public class StudentMailCtrl {
       JsonArray std_list = jsonObject.getAsJsonArray("std_list");
       log.info("std_list:"+std_list);
       int cnt=0;
-      log.info("std_list.get(0):>>>>>>>"+std_list.get(0));
-      log.info("std_list.get(1):>>>>>>>"+std_list.get(1));
       if(std_list !=null) {
          for(int i=0; i < std_list.size(); i++) {
             String stdId=std_list.get(i)+"";
