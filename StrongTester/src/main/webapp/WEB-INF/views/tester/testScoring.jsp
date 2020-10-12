@@ -63,13 +63,10 @@
     <article class="webcam">
         <div>웹캠 기록내역</div>
 
+     <video width="300" height="300" src="./video/SSUITA033212201624232020101217-07-05.mp4" controls autoplay></video>
+     
+     <video width="300" height="300" src="./video/SSUITA033212201624232020101217-07-05.mp4" controls autoplay></video>
 
-     <video  src="./video/SSUIT%A0332120162625%20200918 10-20-56.mp4" controls  ></video>
-     <video  src="./video/SSUIT%A0332120162625%20200918 10-20-56.mp4" controls  ></video>
-
- 
-      
-      
       </article>
     </section>
     

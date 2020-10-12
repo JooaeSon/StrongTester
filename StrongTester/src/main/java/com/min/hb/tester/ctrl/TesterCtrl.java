@@ -64,7 +64,7 @@ public class TesterCtrl {
 	private IService_Student service;
 
 	@Async
-	public   void detectFace(Mat frame, CascadeClassifier faceCascade) {
+	public void detectFace(Mat frame, CascadeClassifier faceCascade) {
 		// TODO Auto-generated method stub
 		Mat frameGray = new Mat();
 		Imgproc.cvtColor(frame, frameGray, Imgproc.COLOR_BGR2GRAY);
@@ -110,10 +110,10 @@ public class TesterCtrl {
 		else {System.out.println("성공");}
 		Mat frame = new Mat();
 
-		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyyMMdd HH-mm-ss");
+		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyyMMddHH-mm-ss");
 		//*
 		//비디오설정==============================================
-		int fourcc = VideoWriter.fourcc('M','J','P','G');
+		int fourcc = VideoWriter.fourcc('m', 'p', '4', 'v');
 		writer= new VideoWriter();
 		Size frameSize = new Size((int) capture.get(Videoio.CAP_PROP_FRAME_WIDTH),(int) capture.get(Videoio.CAP_PROP_FRAME_HEIGHT));
 
@@ -131,7 +131,7 @@ public class TesterCtrl {
 					System.out.println(stdCode);
 					//./video/주관사id+%시험코드+"?"+학번+%영상번호
 					//            String name ="C:\\HappyBugs\\workspace_project\\cnt0_"+time1+".avi";
-					String name ="C:\\HappyBugs\\git\\HappyBug\\StrongTester\\src\\main\\webapp\\video\\SSUIT%A033212"+stdCode+"%"+time1+".mp4";
+					String name ="C:\\HappyBugs\\git\\HappyBug\\StrongTester\\src\\main\\webapp\\video\\SSUITA033212"+stdCode+time1+".mp4";
 							//"C:\\HappyBugs\\workspace_project\\StrongTester\\src\\main\\webapp\\video\\SSUIT%A033212"+stdCode+"%"+time1+".avi";
 					
 					writer.open(name, fourcc, 10, frameSize,true);
@@ -139,7 +139,7 @@ public class TesterCtrl {
 				else if (count >= 2) {      
 					System.out.println("2명 이상 감지");
 					//            String name =".//video//"+stdCode+".avi";
-					String name ="C:\\HappyBugs\\git\\HappyBug\\StrongTester\\src\\main\\webapp\\video\\SSUIT%A033212"+stdCode+"%"+time1+".mp4";
+					String name ="C:\\HappyBugs\\git\\HappyBug\\StrongTester\\src\\main\\webapp\\video\\SSUITA033212"+stdCode+time1+".mp4";
 					//            String name ="C:\\HappyBugs\\workspace_project\\cnt2_"+time1+".avi";
 					writer.open(name, fourcc, 10, frameSize,true);
 					//writer.write(frame);
