@@ -97,12 +97,12 @@ public class TesterCtrl {
 	 * EX) "SSUITA033212201624232020101217-07-05.mp4"
 	 */
 	//videomap: 학번과 비디오 링크를 저장해줄 객체
-	public Map<String, Object> videomap = new HashMap<String, Object>();
-	
+	public static Map<String, Object> videomap = new HashMap<String, Object>();
+	public static List<Map<String, Object>> videolist = new ArrayList<Map<String,Object>>(); 
 	@Async
 	public void run() {
 		log.info("run, let's Start!!!");
-	
+		videomap.put("student_code", stdCode);
 		String[] args= {""};
 		String filenameFaceCascade = args.length > 2 ? args[0] : "C:\\HappyBugs\\git\\HappyBug\\StrongTester\\frontalface.xml";
 
@@ -144,7 +144,6 @@ public class TesterCtrl {
 				
 				if (count==0) {      
 					System.out.println("0명감지");
-					System.out.println(stdCode);
 					//./video/주관사id+시험코드+학번+영상번호(시간)
 					//            String name ="C:\\HappyBugs\\workspace_project\\cnt0_"+time1+".avi";
 					String name ="C:\\HappyBugs\\git\\HappyBug\\StrongTester\\src\\main\\webapp\\video\\SSUITA033212"+stdCode+time1+".mp4";
@@ -154,6 +153,7 @@ public class TesterCtrl {
 					String videofilename=name.substring(61);
 					log.info("videofilename: "+videofilename);
 					videomap.put("capture_content", videofilename);
+					videolist.add(videomap);
 					
 					writer.open(name, fourcc, 10, frameSize,true);
 				}
@@ -167,6 +167,7 @@ public class TesterCtrl {
 					String videofilename=name.substring(61);
 					log.info("videofilename: "+videofilename);
 					videomap.put("capture_content", videofilename);
+					videolist.add(videomap);
 					
 					writer.open(name, fourcc, 10, frameSize,true);
 					//writer.write(frame);
@@ -299,9 +300,6 @@ public class TesterCtrl {
 			out.println("<script>alert('시험 응시가 시작되었습니다.');</script>");
 			out.flush();
 			
-			//비디오 링크 저장을 위한 학생 번호를 웹캠이 켜지기 전 미리 넣기.
-			videomap.put("student_code", student_code);
-			
 			///////////////
 			//<웹캠이 켜지는 순간>
 			System.out.println("인식시작");
@@ -386,7 +384,12 @@ public class TesterCtrl {
 
 		log.info("TestCtrl_Aftersummit 제출 완료");
 		log.info("시험이 끝났습니다. : \t {}");
-
+		
+		System.out.println("videolist:"+videolist);
+		//최종 비디오 링크들 저장
+		for(Map<String, Object> video : videolist) {
+			service.InsertVideo(video);
+		}
 		//세션 제거
 		if(session.getAttribute("student_code") !=null) {
 			log.info("session 제거 완료");

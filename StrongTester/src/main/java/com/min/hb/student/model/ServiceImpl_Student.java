@@ -6,7 +6,9 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.min.hb.student.dtos.StudentAnswerDto;
@@ -86,7 +88,7 @@ public class ServiceImpl_Student implements IService_Student{
 		log.info("ServiceImpl_StudentAnswerInfo 학생답안 및 각 답안 점수 조회 :{}", amap);
 		return dao.StudentAnswerInfo(amap);
 	}
-
+	
 	@Override
 	public boolean InsertVideo(Map<String, Object> vmap) {
 		log.info("ServiceImpl_InsertVideo 비디오 input :{}", vmap);

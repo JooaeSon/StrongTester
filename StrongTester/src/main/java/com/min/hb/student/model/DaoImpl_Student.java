@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Repository;
 
 import com.min.hb.student.dtos.StudentAnswerDto;
@@ -92,7 +93,7 @@ public class DaoImpl_Student implements IDao_Student {
 		log.info("DaoImpl_StudentAnswerInfo 학생답안 및 각 답안 점수 조회 :{}", amap);
 		return session.selectList(NS+"StudentAnswerInfo", amap);
 	}
-
+	
 	@Override
 	public boolean InsertVideo(Map<String, Object> vmap) {
 		log.info("DaoImpl_InsertVideo 비디오 링크 생성 :{}", vmap);
