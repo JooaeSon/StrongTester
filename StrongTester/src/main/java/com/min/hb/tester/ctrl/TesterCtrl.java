@@ -62,7 +62,12 @@ public class TesterCtrl {
 
 	@Autowired
 	private IService_Student service;
-
+	
+	/**
+	 * 얼굴 탐지
+	 * @param frame
+	 * @param faceCascade
+	 */
 	@Async
 	public void detectFace(Mat frame, CascadeClassifier faceCascade) {
 		// TODO Auto-generated method stub
@@ -85,7 +90,12 @@ public class TesterCtrl {
 		}
 	}
 
-
+	/**
+	 * 실행하여 영상 파일(mp4)로 만들고 해당 경로에 저장
+	 * 파일 이름은 SSUIT(주관사 이름)+A033212(시험코드명)+stdCode(학번)+time1(웹캠이 찍힌 시간)+".mp4 형식으로 저장된다.
+	 * 캡처된 비디오 파일이 해당경로에 들어가게 되면 영상 파일 이름 자체(루트경로 빼고)가 DB에 저장 되도록 한다.
+	 * EX) "SSUITA033212201624232020101217-07-05.mp4"
+	 */
 
 	@Async
 	public void run() {
@@ -345,9 +355,8 @@ public class TesterCtrl {
 	}
 
 	/**
-	 * 제출 화면 이동
-	 * 1)캡처된 비디오 링크들이 모두 저장된다.
-	 * 2)session remove
+	 * 답안 제출 화면 이동
+	 * session remove
 	 * @param HttpSession session
 	 * @return String tester/testAfter
 	 * 
