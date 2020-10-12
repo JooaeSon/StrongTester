@@ -131,7 +131,7 @@ public class TesterCtrl {
 					System.out.println(stdCode);
 					//./video/주관사id+%시험코드+"?"+학번+%영상번호
 					//            String name ="C:\\HappyBugs\\workspace_project\\cnt0_"+time1+".avi";
-					String name ="C:\\HappyBugs\\git\\HappyBug\\StrongTester\\src\\main\\webapp\\video\\SSUIT%A033212\"+stdCode+\"%\"+time1+\".mp4";
+					String name ="C:\\HappyBugs\\git\\HappyBug\\StrongTester\\src\\main\\webapp\\video\\SSUIT%A033212"+stdCode+"%"+time1+".mp4";
 							//"C:\\HappyBugs\\workspace_project\\StrongTester\\src\\main\\webapp\\video\\SSUIT%A033212"+stdCode+"%"+time1+".avi";
 					
 					writer.open(name, fourcc, 10, frameSize,true);
@@ -139,7 +139,7 @@ public class TesterCtrl {
 				else if (count >= 2) {      
 					System.out.println("2명 이상 감지");
 					//            String name =".//video//"+stdCode+".avi";
-					String name ="C:\\HappyBugs\\git\\HappyBug\\StrongTester\\src\\main\\webapp\\video\\SSUIT%A033212\"+stdCode+\"%\"+time1+\".mp4";
+					String name ="C:\\HappyBugs\\git\\HappyBug\\StrongTester\\src\\main\\webapp\\video\\SSUIT%A033212"+stdCode+"%"+time1+".mp4";
 					//            String name ="C:\\HappyBugs\\workspace_project\\cnt2_"+time1+".avi";
 					writer.open(name, fourcc, 10, frameSize,true);
 					//writer.write(frame);
