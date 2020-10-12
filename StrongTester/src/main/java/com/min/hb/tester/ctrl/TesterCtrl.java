@@ -96,9 +96,13 @@ public class TesterCtrl {
 	 * 캡처된 비디오 파일이 해당경로에 들어가게 되면 영상 파일 이름 자체(루트경로 빼고)가 DB에 저장 되도록 한다.
 	 * EX) "SSUITA033212201624232020101217-07-05.mp4"
 	 */
-
+	//videomap: 학번과 비디오 링크를 저장해줄 객체
+	public Map<String, Object> videomap = new HashMap<String, Object>();
+	
 	@Async
 	public void run() {
+		log.info("run, let's Start!!!");
+	
 		String[] args= {""};
 		String filenameFaceCascade = args.length > 2 ? args[0] : "C:\\HappyBugs\\git\\HappyBug\\StrongTester\\frontalface.xml";
 
@@ -126,23 +130,30 @@ public class TesterCtrl {
 		int fourcc = VideoWriter.fourcc('m', 'p', '4', 'v');
 		writer= new VideoWriter();
 		Size frameSize = new Size((int) capture.get(Videoio.CAP_PROP_FRAME_WIDTH),(int) capture.get(Videoio.CAP_PROP_FRAME_HEIGHT));
-
+		
+		
 		// 저장 타이머
 		r_timer = new Timer();
 		TimerTask r_task = new TimerTask() {
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub   
+				// TODO Auto-generated method stub
+				log.info("second runinng!!!");
 				Date time = new Date();
 				String time1 = format1.format(time);
 				
 				if (count==0) {      
 					System.out.println("0명감지");
 					System.out.println(stdCode);
-					//./video/주관사id+%시험코드+"?"+학번+%영상번호
+					//./video/주관사id+시험코드+학번+영상번호(시간)
 					//            String name ="C:\\HappyBugs\\workspace_project\\cnt0_"+time1+".avi";
 					String name ="C:\\HappyBugs\\git\\HappyBug\\StrongTester\\src\\main\\webapp\\video\\SSUITA033212"+stdCode+time1+".mp4";
 							//"C:\\HappyBugs\\workspace_project\\StrongTester\\src\\main\\webapp\\video\\SSUIT%A033212"+stdCode+"%"+time1+".avi";
+					
+					//비디오 링크 저장
+					String videofilename=name.substring(61);
+					log.info("videofilename: "+videofilename);
+					videomap.put("capture_content", videofilename);
 					
 					writer.open(name, fourcc, 10, frameSize,true);
 				}
@@ -151,6 +162,12 @@ public class TesterCtrl {
 					//            String name =".//video//"+stdCode+".avi";
 					String name ="C:\\HappyBugs\\git\\HappyBug\\StrongTester\\src\\main\\webapp\\video\\SSUITA033212"+stdCode+time1+".mp4";
 					//            String name ="C:\\HappyBugs\\workspace_project\\cnt2_"+time1+".avi";
+					
+					//비디오 링크 저장
+					String videofilename=name.substring(61);
+					log.info("videofilename: "+videofilename);
+					videomap.put("capture_content", videofilename);
+					
 					writer.open(name, fourcc, 10, frameSize,true);
 					//writer.write(frame);
 				}
@@ -167,7 +184,6 @@ public class TesterCtrl {
 				// TODO Auto-generated method stub   
 				while (capture.read(frame)) {
 					writer.write(frame);
-					//System.out.println("aa");   
 					detectFace(frame,faceCascade);
 				}   
 			}
@@ -282,8 +298,12 @@ public class TesterCtrl {
 			log.info(student_code+"님 시험 응시가 시작되었습니다.");
 			out.println("<script>alert('시험 응시가 시작되었습니다.');</script>");
 			out.flush();
-
-			//////////////
+			
+			//비디오 링크 저장을 위한 학생 번호를 웹캠이 켜지기 전 미리 넣기.
+			videomap.put("student_code", student_code);
+			
+			///////////////
+			//<웹캠이 켜지는 순간>
 			System.out.println("인식시작");
 			nu.pattern.OpenCV.loadShared();
 			//new ObjectDetection();
@@ -293,7 +313,7 @@ public class TesterCtrl {
 
 			return "tester/testPage";
 
-			///////////
+			////////////////
 
 		}else {
 			log.info(student_code+"님은 시험에 응시할 수 없습니다.");
@@ -374,7 +394,15 @@ public class TesterCtrl {
 			session.removeAttribute("student_name");
 			session.removeAttribute("student_uuid");
 		}
+		
+		//garbage collector호출하여 openCv인식 종료.
+		//System.gc();
+		
 		return "tester/testAfter";
 	}
+	
+//	public void finalize() {
+//		log.info("OpenCv인식 종료");
+//	}
 
 }

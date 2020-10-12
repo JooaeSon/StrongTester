@@ -90,7 +90,7 @@
 	<!-- 12.비디오 칼럼 새로 생성 -->
 	<insert id="InsertVideo" parameterType="java.util.Map">
 		INSERT INTO STUDENTCAPTURE (VIDEO_NUM, STUDENT_CODE, TEST_CODE, USER_ID, CAPTURE_CONTENT)
-		VALUES(#{video_num}, #{student_code}, 'A033212', 'SSUIT', #{capture_content})
+		VALUES(VIDEO_SEQ.NEXTVAL, #{student_code}, 'A033212', 'SSUIT', #{capture_content})
 	</insert>
 	
 	<!-- 13.수험자 개인 캡처 비디오 클립 링크 조회 -->
