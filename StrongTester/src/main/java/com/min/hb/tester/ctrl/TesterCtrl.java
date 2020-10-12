@@ -137,7 +137,7 @@ public class TesterCtrl {
 					writer.open(name, fourcc, 10, frameSize,true);
 				}
 				else if (count >= 2) {      
-					System.out.println("2명감지");
+					System.out.println("2명 이상 감지");
 					//            String name =".//video//"+stdCode+".avi";
 					String name ="C:\\HappyBugs\\git\\HappyBug\\StrongTester\\src\\main\\webapp\\video\\SSUIT%A033212\"+stdCode+\"%\"+time1+\".mp4";
 					//            String name ="C:\\HappyBugs\\workspace_project\\cnt2_"+time1+".avi";
