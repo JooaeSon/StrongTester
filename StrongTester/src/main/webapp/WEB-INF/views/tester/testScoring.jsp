@@ -60,13 +60,12 @@
           <td>${stdto.test_sumpoint} 점</td>
         </tr>
       </table>
-    <article class="webcam">
-        <div>웹캠 기록내역</div>
-
-     <video width="300" height="300" src="./video/SSUITA033212201624232020101217-07-05.mp4" controls autoplay></video>
-     
-     <video width="300" height="300" src="./video/SSUITA033212201624232020101217-07-05.mp4" controls autoplay></video>
-
+      
+      <div>웹캠 기록내역</div>
+      <article class="webcam">
+      <c:forEach var="link" items="${linklst}" varStatus="vs">
+     <video width="300" height="300" src="./video/${link}" controls autoplay></video>	
+      </c:forEach>
       </article>
     </section>
     
