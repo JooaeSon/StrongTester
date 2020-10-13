@@ -102,9 +102,8 @@ public class TesterCtrl {
 	@Async
 	public void run() {
 		log.info("run, let's Start!!!");
-		videomap.put("student_code", stdCode);
 		String[] args= {""};
-		String filenameFaceCascade = args.length > 2 ? args[0] : "C:\\HappyBugs\\git\\HappyBug\\StrongTester\\frontalface.xml";
+		String filenameFaceCascade = args.length > 2 ? args[0] : "C:\\HappyBugs\\git\\HappyBug\\StrongTester\\frontalface_alt.xml";
 
 		//      String filenameFaceCascade = args.length > 2 ? args[0] : "C:\\HappyBugs\\workspace_project\\HappyBug\\StrongTester\\frontalface.xml";
 
@@ -150,11 +149,15 @@ public class TesterCtrl {
 							//"C:\\HappyBugs\\workspace_project\\StrongTester\\src\\main\\webapp\\video\\SSUIT%A033212"+stdCode+"%"+time1+".avi";
 					
 					//비디오 링크 저장
+					Map<String, Object> vmap = new HashMap<String, Object>();
 					String videofilename=name.substring(61);
 					log.info("videofilename: "+videofilename);
-					videomap.put("capture_content", videofilename);
-					videolist.add(videomap);
-					
+					vmap.put("student_code", stdCode);
+					vmap.put("capture_content", videofilename);
+				
+					videolist.add(vmap);
+					System.out.println("videolist!!!!:"+videolist);
+					System.out.println("videomap:!!!!!"+vmap);
 					writer.open(name, fourcc, 10, frameSize,true);
 				}
 				else if (count >= 2) {      
@@ -164,10 +167,14 @@ public class TesterCtrl {
 					//            String name ="C:\\HappyBugs\\workspace_project\\cnt2_"+time1+".avi";
 					
 					//비디오 링크 저장
+					Map<String, Object> vmap = new HashMap<String, Object>();
 					String videofilename=name.substring(61);
 					log.info("videofilename: "+videofilename);
-					videomap.put("capture_content", videofilename);
-					videolist.add(videomap);
+					vmap.put("student_code", stdCode);
+					vmap.put("capture_content", videofilename);
+					videolist.add(vmap);
+					System.out.println("videolist!!!!:"+videolist);
+					System.out.println("videomap:!!!!!"+vmap);
 					
 					writer.open(name, fourcc, 10, frameSize,true);
 					//writer.write(frame);
