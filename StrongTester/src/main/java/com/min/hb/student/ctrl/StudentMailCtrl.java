@@ -1,6 +1,7 @@
 package com.min.hb.student.ctrl;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -115,14 +116,16 @@ public class StudentMailCtrl {
             //학생들 개인 정보 가져오기
             StudentInfoDto mailInfo = service.MailBasicInfo(student_code);
             this.key=mailInfo.getStudent_uuid();
-            
+            InetAddress local = InetAddress.getLocalHost();
+            String ip = local.getHostAddress();
+
             String content = "안녕하세요."+mailInfo.getStudent_name()+"님은 이번 STRONG TESTER에서 시험을 응시하게 되었습니다. <br><br>"
                   + "<div style='font-size:15px; text-align:center; border:1px solid #ccc; padding:10px;'>"
                   + "시험 코드:"+mailInfo.getTest_code()+"<br>"
                   + "학과:"+mailInfo.getStudent_deptm()+"<br>"
                   + "학번:"+mailInfo.getStudent_code()+"<br>"
                   + "인증 코드: [ " + key + " ] <br>"
-                  + "시험 링크: <a href='http://localhost:8088/StrongTester/tester.do'> http://localhost:8088/StrongTester/tester.do</a>"
+                  + "시험 링크: <a href='http://"+ip+":8088/StrongTester/tester.do'> http://localhost:8088/StrongTester/tester.do</a>"
                   + "<br></div>"
                   + "****시험코드는 본인이 응시하는 과목과 맞는지 <br>"
                   + "확인해 주시고 인증코드는 정확하게 입력해주세요**** <br><br>"
