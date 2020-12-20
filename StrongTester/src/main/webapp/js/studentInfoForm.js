@@ -86,10 +86,7 @@ function showInfo(stdNumber) {
                 data: "student_code="+stdNumber, // 학번을 post로 전달
                 type:"post",
                 success: function (msg) {
-                    //alert("학번전송", "인증키 전송 성공");
-                    //alert(msg.student_code);
                     frm.stdId.value=msg.student_code;
-                    frm.submit();
                 },
                 error: function () {
                   alert("오류", "잘못된 요청입니다.");
